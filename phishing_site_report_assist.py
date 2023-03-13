@@ -21,9 +21,8 @@ try:
     SHIELD_EMAIL = f.readline().strip()
     ACTUAL_EMAIL = f.readline().strip()
     EMAILS = (SHIELD_EMAIL, ACTUAL_EMAIL)
-    MAIL_SITE=f.readline().strip()
     f.close()
-    if not ("@" in SHIELD_EMAIL and "@" in ACTUAL_EMAIL and "mail" in MAIL_SITE): #rudimentary checks that the config data is actually config data
+    if not ("@" in SHIELD_EMAIL and "@" in ACTUAL_EMAIL): #rudimentary checks that the config data is actually config data
         raise EOFError
 
 except EOFError:
@@ -32,8 +31,7 @@ except EOFError:
 
 
 SECURITY_SITES = ( #List of sites to open
-"https://whois.com/whois",
-MAIL_SITE,
+"https://digital.com/best-web-hosting/who-is/",
 "https://safebrowsing.google.com/safebrowsing/report_phish/",
 "https://www.microsoft.com/en-us/wdsi/support/report-unsafe-site",
 "https://www.fortiguard.com/webfilter",
