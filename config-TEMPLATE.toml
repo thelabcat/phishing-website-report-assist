@@ -1,0 +1,23 @@
+name = "John Doe"
+email = "changeme@wnkj.org"
+logFile = "phishing_reports.txt"
+browserPath = "firefox"
+securitySites = [ #List of sites to open
+    "https://digital.com/best-web-hosting/who-is/",
+    "https://safebrowsing.google.com/safebrowsing/report_phish/",
+    "https://www.microsoft.com/en-us/wdsi/support/report-unsafe-site",
+    "https://www.fortiguard.com/webfilter",
+    "https://www.brightcloud.com/tools/url-ip-lookup.php",
+    "https://threatcenter.crdf.fr/submit_url.html",
+    "https://report.netcraft.com/report",
+    "https://urlfiltering.paloaltonetworks.com/",
+    "https://phishing.eset.com/en-us/report",
+    "https://global.sitesafety.trendmicro.com/index.php",
+    "https://www.bitdefender.com/consumer/support/answer/29358/",
+    "https://sitelookup.mcafee.com/",
+    "https://csi.forcepoint.com/",
+    "https://sitereview.symantec.com/#/",
+    "https://www.spam404.com/report.html",
+    "https://opentip.kaspersky.com/",
+    "https://talosintelligence.com/reputation_center"
+    ]
