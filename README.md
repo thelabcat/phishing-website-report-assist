@@ -1,4 +1,4 @@
-# Phishing Website Preporting Assistant
+# Phishing Website Reporting Assistant
 
 A tool to help with reporting phishing websites to the domain seller and several security flagging databases.
 
