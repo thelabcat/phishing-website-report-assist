@@ -1,31 +1,40 @@
 #!/usr/bin/env python3
-#Fraud website reporting assistant
-#S.D.G.
+"""Fraud website reporting assistant
+
+Opens a list of security vendor websites and provides convenient
+fields for data about the website with copy-to-clipboard buttons.
+S.D.G.
+"""
 
 #import all modules
 from tkinter import *
 import tkinter.messagebox as mb
 import os #To launch browser
 import tomllib
+import sys
+
+#All files we open and save use this encoding
+ENCODING = "utf-8"
 
 #Load config
 CONFIG_FILE = "config.toml"
 try:
-    f = open(CONFIG_FILE)
-    CONFIG = tomllib.loads(f.read())
-    f.close()
+    with open(CONFIG_FILE, encoding = ENCODING) as f:
+        CONFIG = tomllib.loads(f.read())
+
 except FileNotFoundError:
     mb.showerror("No config file", "Could not find " + CONFIG_FILE)
-    quit()
+    sys.exit()
 
 def open_browser():
     """Command to launch browser with all security sites in separate tabs"""
-    os.popen(CONFIG["browserPath"] + " " + " ".join(CONFIG["securitySites"])) #Command to launch browser with all security sites in different tabs
+    os.popen(CONFIG["browserPath"] + " " + " ".join(CONFIG["securitySites"]))
 
 class Window(Tk):
+    """The main Phishing site Report Assist window"""
     def __init__(self):
         """Report Assiatant GUI"""
-        super(Window, self).__init__() #Initialize Tk object
+        super().__init__() #Initialize Tk object
 
         self.title("Phishing Website Report Assistant")
 
@@ -104,9 +113,9 @@ window = Window() #Call main window
 #After the window closes, try to save the URL and comment to the log.
 try:
     if window.reported_url or window.report_comment: #If any information was written then copied, save it.
-        f = open(CONFIG["logFile"], "a")
-        f.write(window.reported_url + "\n" + window.report_comment + "\n\n")
-        f.close()
+        with open(CONFIG["logFile"], "a", encoding = ENCODING) as f:
+            f.write(window.reported_url + "\n" + window.report_comment + "\n\n")
+
 except Exception as ex: #A save error occured. Notify the user.
     text = str(ex)
     if hasattr(ex, "message"):
