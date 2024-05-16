@@ -62,10 +62,10 @@ class Window(Tk):
 
         Label(self.desc_frame, text = "Phishing description:").grid(row=0, sticky=N+E+W)
 
-        self.desc_text = Text(self.desc_frame, width = 30, height = 20, wrap = "word")
-        self.desc_text.grid(row = 1, sticky = NSEW)
+        Button(self.desc_frame, text = "Copy description", command = self.copy_desc).grid(row = 1, sticky = S + E + W)
 
-        Button(self.desc_frame, text = "Copy description", command = self.copy_desc).grid(row = 2, sticky = S + E + W)
+        self.desc_text = Text(self.desc_frame, width = 30, height = 20, wrap = "word")
+        self.desc_text.grid(row = 2, sticky = NSEW)
 
         self.desc_frame.rowconfigure(1, weight = 1) #Set comment text area to expand vertically
         self.desc_frame.columnconfigure(0, weight = 1) #Comment frame is one column wide. Set to expand horizontally
