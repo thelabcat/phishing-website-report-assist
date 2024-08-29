@@ -69,9 +69,9 @@ class Window(Tk):
         self.desc_frame = Frame(self)
         self.desc_frame.grid(row = 3, sticky=N+S+E+W)
 
-        Label(self.desc_frame, text = "Phishing description:").grid(row=0, sticky=N+E+W)
+        Label(self.desc_frame, text = "Phishing description:").grid(row=0, sticky=E+W)
 
-        Button(self.desc_frame, text = "Copy description", command = self.copy_desc).grid(row = 1, sticky = S + E + W)
+        Button(self.desc_frame, text = "Copy description", command = self.copy_desc).grid(row = 1, sticky = E + W)
 
         self.desc_text = Text(self.desc_frame, width = 30, height = 20, wrap = "word")
         self.desc_text.grid(row = 2, sticky = NSEW)
