@@ -3,7 +3,8 @@ email = "changeme@wnkj.org"
 logFile = "phishing_reports.txt"
 browserPath = "firefox"
 securitySites = [ #List of sites to open
-    "https://digital.com/best-web-hosting/who-is/",
+    # "https://digital.com/best-web-hosting/who-is/",
+    "https://lookup.icann.org/en/lookup",
     "https://safebrowsing.google.com/safebrowsing/report_phish/",
     "https://www.microsoft.com/en-us/wdsi/support/report-unsafe-site",
     "https://www.fortiguard.com/webfilter",
