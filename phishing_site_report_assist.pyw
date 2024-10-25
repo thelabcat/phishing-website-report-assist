@@ -76,7 +76,7 @@ class Window(Tk):
         self.desc_text = Text(self.desc_frame, width = 30, height = 20, wrap = "word")
         self.desc_text.grid(row = 2, sticky = NSEW)
 
-        self.desc_frame.rowconfigure(1, weight = 1) #Set comment text area to expand vertically
+        self.desc_frame.rowconfigure(2, weight = 1) #Set comment text area to expand vertically
         self.desc_frame.columnconfigure(0, weight = 1) #Comment frame is one column wide. Set to expand horizontally
 
         self.rowconfigure(3, weight = 1) #Comment frame is on row 3. Set to expand vertically.
