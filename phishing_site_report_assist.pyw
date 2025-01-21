@@ -26,9 +26,16 @@ except FileNotFoundError:
     mb.showerror("No config file", "Could not find " + CONFIG_FILE)
     sys.exit()
 
+#Padding amount to use for big buttons
+BIG_BUTTON_PADDING = 30
+
+#Padding used normally
+DEFAULT_PADDING = 5
+
 def open_browser():
     """Command to launch browser with all security sites in separate tabs"""
-    os.popen(CONFIG["browserPath"] + " " + " ".join(CONFIG["securitySites"]))
+    print("BROWSER OPEN DISABLED. Code must be changed. DO NOT COMMIT THIS.")
+    #os.popen(CONFIG["browserPath"] + " " + " ".join(CONFIG["securitySites"]))
 
 class Window(Tk):
     """The main Phishing site Report Assist window"""
@@ -47,10 +54,26 @@ class Window(Tk):
 
     def build(self):
         """Construct the GUI"""
+        #List of buttons, for size configuration later
+        self.buttons = []
+
+        #Menubar
+        self.menubar = Menu(self)
+        self.config(menu = self.menubar)
+
+        #View menu
+        self.viewmenu = Menu(self.menubar)
+        self.menubar.add_cascade(label = "View", menu = self.viewmenu)
+        self.big_buttons_var = BooleanVar(self, value = False)
+        self.viewmenu.add_checkbutton(label = "Big buttons (for touch screens)", variable = self.big_buttons_var, command = self.update_big_buttons)
 
         #Buttons for copying your ID info
-        Button(self, text = "Copy your name", command = self.copy_name).grid(row = 0, sticky = E + W)
-        Button(self, text = "Copy your email", command = self.copy_email).grid(row = 1, sticky = E + W)
+        bn = Button(self, text = "Copy your name", command = self.copy_name)
+        bn.grid(row = 0, sticky = E + W)
+        self.buttons.append(bn)
+        be = Button(self, text = "Copy your email", command = self.copy_email)
+        be.grid(row = 1, sticky = E + W)
+        self.buttons.append(be)
 
         #Subframe with entry field for malicious URL, and a button to copy it
         self.url_frame=Frame(self)
@@ -61,7 +84,9 @@ class Window(Tk):
         self.url_entry = Entry(self.url_frame)
         self.url_entry.grid(row = 0, column = 1, sticky = NSEW)
 
-        Button(self.url_frame, text = "Copy URL", command = self.copy_url).grid(row=0, column=2)
+        bu = Button(self.url_frame, text = "Copy URL", command = self.copy_url)
+        bu.grid(row=0, column=2)
+        self.buttons.append(bu)
 
         self.url_frame.columnconfigure(1, weight = 1) #Set center column (the one with the field) to expand sideways)
 
@@ -71,7 +96,9 @@ class Window(Tk):
 
         Label(self.desc_frame, text = "Phishing description:").grid(row=0, sticky=E+W)
 
-        Button(self.desc_frame, text = "Copy description", command = self.copy_desc).grid(row = 1, sticky = E + W)
+        bd = Button(self.desc_frame, text = "Copy description", command = self.copy_desc)
+        bd.grid(row = 1, sticky = E + W)
+        self.buttons.append(bd)
 
         self.desc_text = Text(self.desc_frame, width = 30, height = 20, wrap = "word")
         self.desc_text.grid(row = 2, sticky = NSEW)
@@ -82,6 +109,12 @@ class Window(Tk):
         self.rowconfigure(3, weight = 1) #Comment frame is on row 3. Set to expand vertically.
 
         self.columnconfigure(0, weight = 1) #Root window is one column wide. Set to expand sideways.
+
+    def update_big_buttons(self):
+        """Update the GUI based on wether we are using big buttons"""
+        val = (DEFAULT_PADDING, BIG_BUTTON_PADDING)[self.big_buttons_var.get()]
+        for button in self.buttons:
+            button.config(padx = val, pady = val)
 
     def copy_name(self):
         """Copy your name to the clipboard"""
